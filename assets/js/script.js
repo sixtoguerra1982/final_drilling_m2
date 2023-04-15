@@ -1,9 +1,9 @@
-window.onload = (event) => {
+document.addEventListener('DOMContentLoaded', (e) => {
     
     const URL_BASE = "https://digimon-api.vercel.app/api/digimon"
 
 
-    // btn a la escucha
+    // btn a la escucha INICIO
     document.getElementById("btn-load").onclick = function() {
         removeBtnLoad()
         callApi()
@@ -21,7 +21,6 @@ window.onload = (event) => {
         fetch(URL_BASE)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             drawCards(data);
         });
     }
@@ -41,7 +40,9 @@ window.onload = (event) => {
                         <ul>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a href="http://">Más Información</a></li>
+                        <li class="list-group-item">
+                            <button onclick="myShowModal('${temp.name.toLowerCase()}')" type="button" class="btn btn-success btn-more">Más Información</button>
+                        </li>
                     </ul>    
                 </div>
             </article>
@@ -49,4 +50,4 @@ window.onload = (event) => {
         }
     }
     // 
-};
+})
