@@ -11,3 +11,39 @@ body p {
     text-align: center;
     margin: 50px;
 }
+
+
+.area{
+    text-align:center;
+    font-size:2.5em;
+    color:#fff;
+    letter-spacing: -1px;
+    font-weight:700;
+    text-transform:uppercase;
+    animation:blur 2.5s ease-out infinite;
+    text-shadow:0px 0px 5px #fff,
+        0px 0px 7px #279eb6;
+  }
+  
+  @keyframes blur{
+    from{
+        text-shadow:0px 0px 10px #fff,
+        0px 0px 10px #fff, 
+        0px 0px 25px #fff,
+        0px 0px 25px #fff,
+        0px 0px 25px #fff,
+        0px 0px 25px #fff,
+        0px 0px 25px #fff,
+        0px 0px 25px #fff,
+        0px 0px 50px #fff,
+        0px 0px 50px #fff,
+        0px 0px 50px #279eb6,
+        0px 0px 150px #279eb6,
+        0px 10px 100px #279eb6,
+        0px 10px 100px #279eb6,
+        0px 10px 100px #279eb6,
+        0px 10px 100px #279eb6,
+        0px -10px 100px #279eb6,
+        0px -10px 100px #279eb6;
+        }
+  }
