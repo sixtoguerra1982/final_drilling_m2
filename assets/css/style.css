@@ -1,4 +1,13 @@
 body {
     background-color: #279eb6;
+}
+
+body p {
     color: white;
+}
+
+.card {
+    float: left;
+    text-align: center;
+    margin: 50px;
 }
