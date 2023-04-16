@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
             // ARRAY DE NIVELES DE DIGIMON
             NIVEL_BASE.push(temp.level)
             element.innerHTML += `
-            <article class="col-md-3">
+            <article class="col-md-4">
                 <div class="card">
                     <img src="${temp.img}" class="card-img-top" alt="${temp.img}">
                     <div class="card-body">
