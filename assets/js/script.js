@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', (e) => {
     
     const URL_BASE = "https://digimon-api.vercel.app/api/digimon"
-
+    
+    const NIVEL_BASE = []
     // btn a la escucha INICIO
     document.getElementById("btn-load").onclick = function() {
         removeBtnLoad()
-        callApi()
+        callApi(URL_BASE)
     }
 
     // btn a la escucha search
@@ -19,7 +20,15 @@ document.addEventListener('DOMContentLoaded', (e) => {
         search()
     }
 
-    // funciones que realizan las tareas
+    // btn buscar nivel
+    document.getElementById("btn-nivel").onclick = function() {
+        let nivel_search = document.getElementById("nivelDataList").value
+        let element = document.getElementById("list")
+        element.innerHTML = ""
+        callApi(URL_BASE + "/level/" + nivel_search)
+    }
+
+// funciones
     function removeBtnLoad(){
         let element = document.getElementById("list")
         element.innerHTML = ""
@@ -33,8 +42,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
     } 
         // Actualiza elementos en vista
 
-    function callApi() {
-        fetch(URL_BASE)
+    function callApi(url) {
+        fetch(url)
         .then(response => response.json())
         .then(data => {
             drawCards(data);
@@ -44,8 +53,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
     
     function drawCards(data) {
         let element = document.getElementById("list")
-
         for (let temp of data){ 
+            // ARRAY DE NIVELES DE DIGIMON
+            NIVEL_BASE.push(temp.level)
             element.innerHTML += `
             <article class="col-md-3">
                 <div class="card">
@@ -65,9 +75,24 @@ document.addEventListener('DOMContentLoaded', (e) => {
             </article>
             `
         }
-
+        // load
         element = document.getElementById("frame-load")
         element.classList.add("d-none")
+        // 
+        // ELIMINAR NIVELES REPETIDOS Y CARGAR EN LISTADO
+        let tabla = {}
+        let nivelBasicoUnico = NIVEL_BASE.filter((indice) => {
+            return tabla.hasOwnProperty(indice) ? false : (tabla[indice] = true)
+        })
+        console.log(nivelBasicoUnico)
+        let listNivel = document.getElementById("levels")
+        listNivel.innerHTML = ""
+        for (item of nivelBasicoUnico){
+            listNivel.innerHTML += `
+                <option value="${item}"> 
+            `
+        }
+
     }
         // Dibujo dinamico de cards digimon
     // 
@@ -78,7 +103,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         if (search.length == 0) {
             let element = document.getElementById("list")
             element.innerHTML = ""
-            callApi()
+            callApi(URL_BASE)
         } else {
             let name = search.toLowerCase()
             fetch(URL_BASE + "/name/" + name)
