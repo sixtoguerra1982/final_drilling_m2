@@ -9,9 +9,15 @@ body p {
 .card {
     float: left;
     text-align: center;
-    margin: 50px;
 }
 
+.mt-center {
+    margin-top: 10rem!important;
+}
+
+article{
+    padding: 12px;
+}
 /* animacion de texto */
 .area{
     text-align:center;
