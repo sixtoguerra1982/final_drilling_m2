@@ -14,9 +14,19 @@ document.addEventListener('DOMContentLoaded', (e) => {
         search()
     }
 
+    // enter en input buscar
+    var input = document.getElementById("txt-search")
+    input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("btn-search").click();
+        }
+    })
+
     // btn refresh
     document.getElementById("btn-refresh").onclick = function() {
         document.getElementById("txt-search").value = ""
+        document.getElementById("nivelDataList").value = ""
         search()
     }
 
@@ -25,8 +35,23 @@ document.addEventListener('DOMContentLoaded', (e) => {
         let nivel_search = document.getElementById("nivelDataList").value
         let element = document.getElementById("list")
         element.innerHTML = ""
-        callApi(URL_BASE + "/level/" + nivel_search)
+        if (nivel_search.length > 0){
+            callApi(URL_BASE + "/level/" + nivel_search)
+        }else{
+            let frameLoad = document.getElementById("frame-load")
+            frameLoad.classList.remove("d-none")
+            callApi(URL_BASE)
+        }
     }
+
+    // enter en input buscar nivel
+    input = document.getElementById("nivelDataList")
+    input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("btn-nivel").click();
+        }
+    })
 
 // funciones
     function removeBtnLoad(){
@@ -101,6 +126,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
     function search(){
         var search = document.getElementById("txt-search").value
         if (search.length == 0) {
+            let frameLoad = document.getElementById("frame-load")
+            frameLoad.classList.remove("d-none")
             let element = document.getElementById("list")
             element.innerHTML = ""
             callApi(URL_BASE)
